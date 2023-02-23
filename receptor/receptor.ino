@@ -75,26 +75,42 @@ void ir_a_s3(){
     digitalWrite(girarizq,LOW);
   }
 }
-
+// void regreso(origen){
+//   switch (origen) {
+//   case 'a':
+//     // statements
+//     break;
+//   case 'b':
+//     // statements
+//     break;
+//   case 'c':
+//     // statements
+//     break;
+//   case 'd':
+//     // statements
+//     break;
+// }  
+// }
 
 // LOOP //////////////////////////////////////////////////
 void loop(){
     if (Serial3.available()>0)
     {
-      destino=Serial3.read();
-      if(destino=='a')
+      destino=Serial3.parseInt();
+      Serial.println(destino);
+      if(destino==1)
        {
          ir_a_s1();
        }
-        if(destino=='b')
+        if(destino==2)
        {
          ir_a_s2();
        }
-       if(destino=='c')
+       if(destino==3)
        {
          ir_a_s3();
        }
-       if(destino=='d')
+       if(destino==4)
        {
          ir_a_s4();
        }

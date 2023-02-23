@@ -17,22 +17,22 @@ void setup()
 void loop(){
   if (Serial.available()>0)
     {
-      destino=Serial.read();
-      if(destino=='a')
+      destino=Serial.parseInt();
+      if(destino==1)
        {
-         Serial3.print('a');
+         Serial3.print(1);
        }
-       if(destino=='b')
+       if(destino==2)
        {
-         Serial3.print('b');
+         Serial3.print(2);
        }
-       if(destino=='c')
+       if(destino==3)
        {
-         Serial3.print('c');
+         Serial3.print(3);
        }
-       if(destino=='d')
+       if(destino==4)
        {
-         Serial3.print('d');
+         Serial3.print(4);
        }
     }
 }
