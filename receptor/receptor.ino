@@ -31,8 +31,10 @@ void ir_a_s1() {
   while (digitalRead(s1) == LOW) {
     digitalWrite(girarizq, LOW);
     digitalWrite(girarder, HIGH);
+    enviar_senal();
   }
   digitalWrite(girarder, LOW);
+  enviar_senal();
 }
 //////
 void ir_a_s2() {
@@ -40,16 +42,20 @@ void ir_a_s2() {
     while (digitalRead(s2) == LOW) {
       digitalWrite(girarder, LOW);
       digitalWrite(girarizq, HIGH);
+      enviar_senal();
     }
     digitalWrite(girarizq, LOW);
+    enviar_senal();
   }
 
   if ((digitalRead(s3) == HIGH) || (digitalRead(s4) == HIGH)) {
     while (digitalRead(s2) == LOW) {
       digitalWrite(girarizq, LOW);
       digitalWrite(girarder, HIGH);
+      enviar_senal();
     }
     digitalWrite(girarder, LOW);
+    enviar_senal();
   }
 }
 //////
@@ -57,8 +63,10 @@ void ir_a_s4() {
   while (digitalRead(s4) == LOW) {
     digitalWrite(girarizq, HIGH);
     digitalWrite(girarder, LOW);
+    enviar_senal();
   }
   digitalWrite(girarizq, LOW);
+  enviar_senal();
 }
 //////
 void ir_a_s3() {
@@ -66,16 +74,20 @@ void ir_a_s3() {
     while (digitalRead(s3) == LOW) {
       digitalWrite(girarizq, LOW);
       digitalWrite(girarder, HIGH);
+      enviar_senal();
     }
     digitalWrite(girarder, LOW);
+    enviar_senal();
   }
 
   if ((digitalRead(s1) == HIGH) || (digitalRead(s2) == HIGH)) {
     while (digitalRead(s3) == LOW) {
       digitalWrite(girarder, LOW);
       digitalWrite(girarizq, HIGH);
+      enviar_senal();
     }
     digitalWrite(girarizq, LOW);
+    enviar_senal();
   }
 }
 ///////
@@ -149,9 +161,26 @@ void pausa() {
     tiempo_transcurrido = millis();
   }
 }
+///////
+void enviar_senal() {
+  Serial.println("enviando senal");
+  int der = digitalRead(girarder);
+  int izq = digitalRead(girarizq);
+  if (der==1) {
+    Serial3.print(2);
+  }
+  else if (izq==1) {
+    Serial3.print(1);
+  }
+  else {
+    Serial3.print(0);
+  }
+}
+
 
 // LOOP //////////////////////////////////////////////////
 void loop() {
+  enviar_senal();
   leer_origen();
  
   leer_tiempo();
