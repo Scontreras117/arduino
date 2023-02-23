@@ -1,4 +1,7 @@
 int destino;
+int tiempo;
+int arranque = 0;
+
 int origen;
 
 int s1 = 30;
@@ -109,13 +112,43 @@ void regreso() {
       break;
   }
 }
+//////
+void leer_destino(){
+  while (Serial3.available()==0) {
+  }
+  destino = Serial3.parseInt();
+  Serial.println("destino:");
+  Serial.println(destino);
+}
+//////
+void leer_tiempo() {
+  while (Serial3.available()==0) {
+  }
+  tiempo = Serial3.parseInt();
+  Serial.println("tiempo:");
+  Serial.println(tiempo);
+}
+///////
+void leer_arranque() {
+  while (Serial3.available()==0) {
+  }
+  arranque = Serial3.parseInt();
+  Serial.println("arranque:");
+  Serial.println(arranque);
+}
 
 // LOOP //////////////////////////////////////////////////
 void loop() {
   leer_origen();
-  if (Serial3.available() > 0) {
-    destino = Serial3.parseInt();
-    Serial.println(destino);
+ 
+  leer_tiempo();
+
+  leer_destino();
+
+
+  leer_arranque();
+
+  if (arranque==1) {
     if (destino == 1) {
       ir_a_s1();
     }
