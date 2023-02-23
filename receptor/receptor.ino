@@ -1,5 +1,5 @@
 int destino;
-int tiempo;
+int tiempo_pausa;
 int arranque = 0;
 
 int origen = 0;
@@ -126,9 +126,9 @@ void leer_destino(){
 void leer_tiempo() {
   while (Serial3.available()==0) {
   }
-  tiempo = Serial3.parseInt();
-  Serial.println("tiempo:");
-  Serial.println(tiempo);
+  tiempo_pausa = Serial3.parseInt();
+  Serial.println("tiempo de pausa:");
+  Serial.println(tiempo_pausa);
 }
 ///////
 void leer_arranque() {
@@ -140,7 +140,14 @@ void leer_arranque() {
 }
 ///////
 void pausa() {
+  digitalWrite(girarizq, LOW);
+  digitalWrite(girarder, LOW);
 
+  int tiempo_anterior = millis();
+  int tiempo_transcurrido = millis();
+  while ((tiempo_transcurrido-tiempo_anterior) < tiempo_pausa*1000 ){
+    tiempo_transcurrido = millis();
+  }
 }
 
 // LOOP //////////////////////////////////////////////////
@@ -166,6 +173,7 @@ void loop() {
     if (destino == 4) {
       ir_a_s4();
     }
+    pausa();
     regreso();
   }
 }
