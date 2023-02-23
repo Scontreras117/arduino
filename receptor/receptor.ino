@@ -2,7 +2,7 @@ int destino;
 int tiempo;
 int arranque = 0;
 
-int origen;
+int origen = 0;
 
 int s1 = 30;
 int s2 = 31;
@@ -80,17 +80,19 @@ void ir_a_s3() {
 }
 ///////
 void leer_origen() {
-  if (digitalRead(s1) == HIGH) {
-    origen = 1;
-  }
-  if (digitalRead(s2) == HIGH) {
-    origen = 2;
-  }
-  if (digitalRead(s3) == HIGH) {
-    origen = 3;
-  }
-  if (digitalRead(s4) == HIGH) {
-    origen = 4;
+  while (origen==0) {
+    if (digitalRead(s1) == HIGH) {
+      origen = 1;
+    }
+    if (digitalRead(s2) == HIGH) {
+      origen = 2;
+    }
+    if (digitalRead(s3) == HIGH) {
+      origen = 3;
+    }
+    if (digitalRead(s4) == HIGH) {
+      origen = 4;
+    }
   }
   Serial.println("origen:");
   Serial.println(origen);
@@ -136,6 +138,10 @@ void leer_arranque() {
   Serial.println("arranque:");
   Serial.println(arranque);
 }
+///////
+void pausa() {
+
+}
 
 // LOOP //////////////////////////////////////////////////
 void loop() {
@@ -144,7 +150,6 @@ void loop() {
   leer_tiempo();
 
   leer_destino();
-
 
   leer_arranque();
 
