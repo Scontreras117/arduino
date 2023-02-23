@@ -23,19 +23,61 @@ void setup() {
   Serial.print("Comenzamos");
 }
 
-// FUNCIONES
+// FUNCIONES /////////////////////////////////////////////////
 void ir_a_s1(){
   while (digitalRead(s1) == LOW) {
     digitalWrite(girarizq,LOW);
     digitalWrite(girarder,HIGH);
   }
-  digitalWrite(girarder,LOW);    
+  digitalWrite(girarder,LOW);
+}
+//////
+void ir_a_s2(){
+  if (digitalRead(s1)) {
+    while (digitalRead(s2) == LOW){
+      digitalWrite(girarder,LOW);
+      digitalWrite(girarizq,HIGH);
+    } 
+    digitalWrite(girarizq,LOW);
+  }
+
+  if ((digitalRead(s3) == HIGH)||(digitalRead(s4) == HIGH)) {
+    while (digitalRead(s2) == LOW){
+      digitalWrite(girarizq,LOW);
+      digitalWrite(girarder,HIGH);
+    } 
+    digitalWrite(girarder,LOW);
+  }
+}
+//////
+void ir_a_s4(){
+  while (digitalRead(s4) == LOW) {
+    digitalWrite(girarizq,HIGH);
+    digitalWrite(girarder,LOW);
+  }
+  digitalWrite(girarizq,LOW);
+}
+//////
+void ir_a_s3(){
+  if (digitalRead(s4)) {
+    while (digitalRead(s3) == LOW){
+      digitalWrite(girarizq,LOW);
+      digitalWrite(girarder,HIGH);
+    } 
+    digitalWrite(girarder,LOW);
+  }
+
+  if ((digitalRead(s1) == HIGH)||(digitalRead(s2) == HIGH)) {
+    while (digitalRead(s3) == LOW){
+      digitalWrite(girarder,LOW);
+      digitalWrite(girarizq,HIGH);
+    } 
+    digitalWrite(girarizq,LOW);
+  }
 }
 
 
-
-
-// LOOP
+// LOOP //////////////////////////////////////////////////
 void loop(){
     if (Serial3.available()>0)
     {
@@ -44,17 +86,17 @@ void loop(){
        {
          ir_a_s1();
        }
-       if(destino=='r')
+        if(destino=='b')
        {
-         analogWrite(4,255);
-         analogWrite(3,0);
-         analogWrite(2,0);
+         ir_a_s2();
        }
-       if(destino=='a')
+       if(destino=='c')
        {
-         analogWrite(2,255);
-         analogWrite(4,0);
-         analogWrite(3,0);
+         ir_a_s3();
+       }
+       if(destino=='d')
+       {
+         ir_a_s4();
        }
     }
 }  
