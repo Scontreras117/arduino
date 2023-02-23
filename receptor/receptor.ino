@@ -23,14 +23,26 @@ void setup() {
   Serial.print("Comenzamos");
 }
 
+// FUNCIONES
+void ir_a_s1(){
+  while (digitalRead(s1) == LOW) {
+    digitalWrite(girarizq,LOW);
+    digitalWrite(girarder,HIGH);
+  }
+  digitalWrite(girarder,LOW);    
+}
+
+
+
+
+// LOOP
 void loop(){
     if (Serial3.available()>0)
     {
       destino=Serial3.read();
       if(destino=='a')
        {
-         digitalWrite(girarder,LOW);
-         digitalWrite(girarizq,HIGH);
+         ir_a_s1();
        }
        if(destino=='r')
        {
@@ -47,29 +59,6 @@ void loop(){
     }
 }  
 
-
-
-
-
-
-
-// /////////////////////////////////////////////////////////////77
-ir_a_s1(origen);
-   Serial.println("Yendo al S1");
-   switch (origen) {
-    case label1:
-      // statements
-      break;
-    case label2:
-      // statements
-      break;
-    default:
-      // statements
-      break;
-  }
-    
-  
-  }
 
 
 
